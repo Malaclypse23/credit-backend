@@ -20,7 +20,7 @@ public class LoanService {
             years = amount.divide(annuitaet, 0, RoundingMode.UP).intValue();
         }
 
-        BigDecimal zins, tilgung, rest, totalZins = BigDecimal.ZERO;
+        BigDecimal zins, tilgung, rest = amount, totalZins = BigDecimal.ZERO;
         boolean allPaid = false;
 
         for (int year = 1; year <= years && allPaid == false; year++) {
@@ -37,11 +37,13 @@ public class LoanService {
             if (rest.compareTo(BigDecimal.ZERO) < 0) {
                 allPaid = true;
                 rest = BigDecimal.ZERO;
+
             }
             totalZins = totalZins.add(zins);
             payback.getRates().add(new Rate(year, zins, tilgung, rest));
         }
         payback.setTotalInterest(totalZins);
+        payback.setLoan(amount.add(totalZins).subtract(rest));
         return payback;
     }
 

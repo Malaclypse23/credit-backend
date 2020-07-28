@@ -8,7 +8,8 @@ public class Payback {
 
     private BigDecimal monthly;
     private BigDecimal totalInterest;
-    private List<Rate> rates = new ArrayList<Rate>();
+	private List<Rate> rates = new ArrayList<Rate>();
+	private BigDecimal loan;
 
     public Payback() {
     }
@@ -40,6 +41,14 @@ public class Payback {
 
 	public void setRates(List<Rate> rates) {
 		this.rates = rates;
+	}
+
+	public BigDecimal getLoan() {
+		return this.loan;
+	}
+
+	public void setLoan(BigDecimal loan) {
+		this.loan = loan;
 	}
 
 }
